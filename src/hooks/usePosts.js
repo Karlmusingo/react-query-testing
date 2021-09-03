@@ -9,12 +9,3 @@ export default function usePosts() {
 
   return req
 }
-
-// export const useGet = (url: string, queryKey: string | [string]) =>
-//   useQuery(queryKey, () => axios.get(url).then((res) => res.data))
-
-// export default function usePosts() {
-//   return useQuery('posts', () =>
-//     axios.get('/api/posts').then((res) => res.data)
-//   )
-// }

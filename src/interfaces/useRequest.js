@@ -1,8 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-// import { useQuery, queryCache } from 'react-query'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
-import { POSTS } from '../constants/queryKeys'
 
 export const useGetRequest = (url, storeKey) =>
   useQuery(storeKey, () => axios.get(url).then((res) => res.data))
