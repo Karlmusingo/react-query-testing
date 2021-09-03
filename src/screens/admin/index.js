@@ -9,7 +9,8 @@ import useCreatePost from '../../hooks/useCreatePost'
 
 export default function Posts() {
   const postsQuery = usePosts()
-  const [createPost, createPostInfo] = useCreatePost()
+  // const [createPost, createPostInfo] = useCreatePost()
+  const useCreate = useCreatePost()
 
   return (
     <section>
@@ -24,7 +25,7 @@ export default function Posts() {
               <h3>Posts</h3>
               <ul>
                 {postsQuery.data.map((post) => (
-                  <li key={post.id}>
+                  <li key={post.id + Math.random()}>
                     <Link to={`./${post.id}`}>{post.title}</Link>
                   </li>
                 ))}
@@ -39,14 +40,14 @@ export default function Posts() {
         <h3>Create New Post</h3>
         <div>
           <PostForm
-            onSubmit={createPost}
+            onSubmit={useCreate.mutate}
             clearOnSubmit
             submitText={
-              createPostInfo.isLoading
+              useCreate.isLoading
                 ? 'Saving...'
-                : createPostInfo.isError
+                : useCreate.isError
                 ? 'Error!'
-                : createPostInfo.isSuccess
+                : useCreate.isSuccess
                 ? 'Saved!'
                 : 'Create Post'
             }

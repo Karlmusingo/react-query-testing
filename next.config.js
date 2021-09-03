@@ -48,6 +48,8 @@ module.exports = {
       ...config.resolve,
       alias: {
         ...config.resolve.alias,
+        root: './src',
+        baseUrl: './src',
         react$: resolveFrom(path.resolve('node_modules'), 'react'),
         'react-query$': resolveFrom(
           path.resolve('node_modules'),
