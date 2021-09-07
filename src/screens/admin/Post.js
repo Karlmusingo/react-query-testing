@@ -15,15 +15,17 @@ export default function Post() {
   const navigate = useNavigate()
 
   const postQuery = usePost(postId)
-  const [savePost, savePostInfo] = useSavePost()
-  const [deletePost, deletePostInfo] = useDeletePost()
+  const useSave = useSavePost(postId)
+  const useDelete = useDeletePost(postId)
+
+  console.log('useDelete :>> ', useDelete)
 
   const onSubmit = async (values) => {
-    await savePost(values)
+    await useSave.mutate(values)
   }
 
   const onDelete = async () => {
-    await deletePost(postId)
+    await useDelete.mutate()
     navigate('/admin')
   }
 
@@ -43,11 +45,12 @@ export default function Post() {
             initialValues={postQuery.data}
             onSubmit={onSubmit}
             submitText={
-              savePostInfo.isLoading
+              // 'Save Post'
+              useSave.isLoading
                 ? 'Saving...'
-                : savePostInfo.isError
+                : useSave.isError
                 ? 'Error!'
-                : savePostInfo.isSuccess
+                : useSave.isSuccess
                 ? 'Saved!'
                 : 'Save Post'
             }
@@ -55,11 +58,11 @@ export default function Post() {
 
           <p>
             <button onClick={onDelete}>
-              {deletePostInfo.isLoading
+              {useDelete.isLoading
                 ? 'Deleting...'
-                : deletePostInfo.isError
+                : useDelete.isError
                 ? 'Error!'
-                : deletePostInfo.isSuccess
+                : useDelete.isSuccess
                 ? 'Deleted!'
                 : 'Delete Post'}
             </button>
